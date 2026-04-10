@@ -5,10 +5,10 @@ import { Button } from './components/ui/Button'
 import { Loader } from './components/ui/Loader'
 import { AuthCallbackPage } from './features/auth/AuthCallbackPage'
 import { LoginPage } from './features/auth/LoginPage'
-import { CustomerWeeklyOrderPage } from './features/customer/CustomerWeeklyOrderPage'
-import { CustomerOrdersHistoryPage } from './features/customer/CustomerOrdersHistoryPage'
-import { CustomerProfilePage } from './features/customer/CustomerProfilePage'
-import { BakeryDashboardPage } from './features/bakery/BakeryDashboardPage'
+import { CustomerWeeklyOrderPage } from './cliente/CustomerWeeklyOrderPage'
+import { CustomerOrdersHistoryPage } from './cliente/CustomerOrdersHistoryPage'
+import { CustomerProfilePage } from './cliente/CustomerProfilePage'
+import { BakeryDashboardPage } from './panaderia/BakeryDashboardPage'
 
 function FullScreenMessage({ children }: { children: React.ReactNode }) {
   return (
@@ -87,7 +87,7 @@ function RequireRole({ role }: { role: UserRole }) {
   return <Outlet />
 }
 
-/** Área cliente: `customer` y también `bakery_admin` (pueden pedir como cualquier usuario). */
+/** Área cliente: solo `customer` (separación total de vistas). */
 function RequireCustomerApp() {
   const { session, profile, loading, profileLoading, profileError, refreshProfile } = useAuth()
   const location = useLocation()
@@ -106,9 +106,8 @@ function RequireCustomerApp() {
       <ProfileBlocked message={profileError ?? 'No se pudo cargar el perfil.'} onRetry={refreshProfile} />
     )
   }
-  if (profile.role !== 'customer' && profile.role !== 'bakery_admin') {
-    return <Navigate to="/" replace />
-  }
+  if (profile.role === 'bakery_admin') return <Navigate to="/bakery" replace />
+  if (profile.role !== 'customer') return <Navigate to="/" replace />
   return <Outlet />
 }
 

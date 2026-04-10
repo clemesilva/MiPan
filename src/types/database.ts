@@ -4,6 +4,8 @@ export type OrderStatus = 'pending' | 'confirmed'
 export type Profile = {
   id: string
   role: UserRole
+  /** Panadería asociada (solo para bakery_admin). */
+  bakery_id?: number | null
   /** Nombre para mostrar (OAuth o manual) */
   full_name: string | null
   given_name: string | null

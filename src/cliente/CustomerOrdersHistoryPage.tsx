@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext'
-import { fetchWeeklyOrdersSummaryForUser, type OrderSummaryRow } from '../../services/orders'
-import { formatWeekRangeEs } from '../../lib/week'
-import { AppNavbar } from '../../components/layout/AppNavbar'
-import { Loader } from '../../components/ui/Loader'
+import { useAuth } from '../contexts/AuthContext'
+import { fetchWeeklyOrdersSummaryForUser, type OrderSummaryRow } from '../services/orders'
+import { formatWeekRangeEs } from '../lib/week'
+import { AppNavbar } from '../components/layout/AppNavbar'
+import { Loader } from '../components/ui/Loader'
 
 export function CustomerOrdersHistoryPage() {
   const { user } = useAuth()

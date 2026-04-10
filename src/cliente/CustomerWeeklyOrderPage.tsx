@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import {
   addDaysYmd,
   formatWeekRangeEs,
   mondayFromAnyYmd,
   mondayWeekStart,
-} from '../../lib/week';
-import { fetchActiveProducts } from '../../services/products';
+} from '../lib/week';
+import { fetchActiveProducts } from '../services/products';
 import {
   confirmWeeklyOrder,
   fetchMyWeeklyOrderItemsByWeek,
@@ -15,11 +15,11 @@ import {
   getOrCreateWeeklyOrder,
   upsertOrderItems,
   type ItemCell,
-} from '../../services/orders';
-import type { Product, WeeklyOrderItem } from '../../types/database';
-import { AppNavbar } from '../../components/layout/AppNavbar';
-import { Button } from '../../components/ui/Button';
-import { Loader } from '../../components/ui/Loader';
+} from '../services/orders';
+import type { Product, WeeklyOrderItem } from '../types/database';
+import { AppNavbar } from '../components/layout/AppNavbar';
+import { Button } from '../components/ui/Button';
+import { Loader } from '../components/ui/Loader';
 
 /** Cantidad por día (lun–sáb, la misma) a partir de filas guardadas. */
 function qtyPerDayFromItems(

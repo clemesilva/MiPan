@@ -46,8 +46,8 @@ export function AppNavbar() {
 
   if (!profile) return null
 
-  const showPedido = profile.role === 'customer' || profile.role === 'bakery_admin'
-  const showBakery = profile.role === 'bakery_admin'
+  const isCustomer = profile.role === 'customer'
+  const isBakeryAdmin = profile.role === 'bakery_admin'
 
   return (
     <header className="sticky top-0 z-30 border-b border-[var(--color-border)] bg-[color-mix(in_srgb,var(--color-card)_88%,transparent)] backdrop-blur-lg shadow-[0_1px_0_rgba(28,25,23,0.04)]">
@@ -70,24 +70,24 @@ export function AppNavbar() {
 
         <nav className="min-w-0 flex-1">
           <div className="-mx-1 flex items-center gap-1 overflow-x-auto px-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:gap-1.5 sm:pl-4">
-          {showPedido && (
-            <>
-              <NavLink to="/app/pedido" className={({ isActive }) => navClass(isActive)}>
-                Pedido
+            {isCustomer && (
+              <>
+                <NavLink to="/app/pedido" className={({ isActive }) => navClass(isActive)}>
+                  Pedido
+                </NavLink>
+                <NavLink to="/app/pedidos" className={({ isActive }) => navClass(isActive)}>
+                  Mis pedidos
+                </NavLink>
+                <NavLink to="/app/perfil" className={({ isActive }) => navClass(isActive)}>
+                  Mi perfil
+                </NavLink>
+              </>
+            )}
+            {isBakeryAdmin && (
+              <NavLink to="/bakery" className={({ isActive }) => navClass(isActive)}>
+                Panadería
               </NavLink>
-              <NavLink to="/app/pedidos" className={({ isActive }) => navClass(isActive)}>
-                Mis pedidos
-              </NavLink>
-              <NavLink to="/app/perfil" className={({ isActive }) => navClass(isActive)}>
-                Mi perfil
-              </NavLink>
-            </>
-          )}
-          {showBakery && (
-            <NavLink to="/bakery" className={({ isActive }) => navClass(isActive)}>
-              Panadería
-            </NavLink>
-          )}
+            )}
           </div>
         </nav>
 

@@ -240,12 +240,14 @@ export type BakeryRow = {
 
 export async function fetchBakeryProduction(
   weekStart: string,
+  bakeryId: number,
 ): Promise<BakeryRow[]> {
   const { data: orders, error: ordErr } = await supabase
     .from('weekly_orders')
     .select('id, user_id')
     .eq('week_start', weekStart)
     .eq('status', 'confirmed')
+    .eq('bakery_id', bakeryId)
 
   if (ordErr) throw ordErr
   if (!orders?.length) return []
